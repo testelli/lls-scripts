@@ -1,0 +1,42 @@
+GLOBAL_TIMEOUT = 3000;
+
+//PAGE / URL VARIABLES
+var env = "http://www.";
+//var pageURL = ".teamintraining.org";
+
+//MESSAGEING VARIABLES
+var msg_AssertTitle = "Page title correct: ";
+var msg_AssertURL = "Current page is hosted in: ";
+
+//SCRIPTS
+var suites = [
+
+//New - RFF
+//require('./scripts/CSVtest_MWOY'),
+//require('./scripts/CSVtest_TNT'),
+//require('./scripts/CSVtest_LTN'),
+require('./scripts/CSVtest_LCR')
+
+//Old - Hardcoded
+//require('./scripts/lls'),
+//require('./scripts/ltn'),
+//require('./scripts/regatta'),
+//require('./scripts/mwoy')
+
+];
+
+// outdent	
+
+for (var i = 0; i < suites.length; i++) {
+	casper.test.begin(suites[i].suiteName, suites[i].run);
+}
+
+/** DO NOT EDIT BELOW THIS LINE **/
+
+// Asynchronously exit PhantomJS to work around a bug in that package:
+// http://stackoverflow.com/questions/26608391/using-phantomjs-to-embed-all-images-of-a-webpage-produces-warnings-but-works/26688062#26688062
+
+casper.test.begin('Finished all tests', function(test) {
+	test.done();
+	setTimeout(function(){ phantom.exit(0); }, 0);
+});
