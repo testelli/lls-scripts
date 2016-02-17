@@ -1,0 +1,91 @@
+module.exports = {
+	suiteName:'Light the Night',
+	run: function (test) {
+
+		console.log('Starting Light the Night test script on ' + env + '...');
+		
+		// Home page
+		casper.start(env + 'lightthenight.org/', function() {
+			
+			test.assertTitle("Light The Night Walk: Taking Steps to Cure Cancer", "LTN Home Page: title is correct");
+			test.assertUrlMatch(env, 'Current page is served in ' + env);
+			test.assertExists('div#content', "LTN Home Page: Page content exists.");
+			casper.capture('Screenshots/LTN/LTN_Home.png');
+		});	
+
+		//What is Light The Night
+		casper.thenClick("a[href='/what/']", function() {
+				
+				test.assertTitle("What is Light The Night", "What is LTN: Page title is correct");
+				test.assertUrlMatch(env, 'Current page is served in ' + env);
+				test.assertExists('div#mainContent_subpage', "What is LTN: Page content exists.");
+				casper.capture('Screenshots/LTN/LTN_WhatisLTN.png');
+			});
+
+		//Ways to participate
+		casper.thenClick("a[href='/ways/']", function() {
+			
+			test.assertTitle("Ways to Participate", "Ways to Participate: Page title is correct");
+			test.assertUrlMatch(env, 'Current page is served in ' + env);
+			test.assertExists('div#mainContent_subpage', "Ways to Participate: Page content exists.");
+			casper.capture('Screenshots/LTN/LTN_WaystoPart.png');
+		});
+
+		//Register to Walk
+		//casper.thenClick("a[href='/register/']", function() {
+		casper.thenOpen('https://dev7registration.lightthenight.org/', function() {		
+			casper.wait(20000, function() {
+				casper.capture('Screenshots/LTN/LTN_RegtoWalk.png');
+				test.assertTitle("Light The Night | Leukemia & Lymphoma Society", "Register to Walk: Page title is correct");
+				test.assertUrlMatch(env + 'registration', 'Current page is served in ' + env);
+				test.assertExists('.main-content', "Register to Walk: Page content exists.");
+				//casper.capture('Screenshots/LTN/LTN_RegtoWalk.png');
+				casper.thenOpen(env + '.lightthenight.org/'); //back() not working, buggy?
+			});
+		});
+
+		//Find Local Walks  
+		casper.thenClick("a[href='/selectwalk/']", function() {
+
+			test.assertTitle("Search Participants/Events", "Find Local Walks: Page title is correct");
+			test.assertUrlMatch(env, 'Current page is served in ' + env);
+			test.assertExists('article.page', "Find Local Walks: Page content exists.");
+			
+			//search for event by location
+			this.click('#switchMapGridResults'); // set to list view rather than map view
+			this.sendKeys('#eventSearchZipCodeInput', "19019"); //enter zip code
+			this.click('#searchEventsButton'); //search
+			casper.wait(3000, function(){
+				casper.capture('Screenshots/LTN/LTN_test.png');
+				//casper.assertEquals('div.searchResultsTotal', 1 [,'1 event found']);
+
+				casper.thenOpen(env + '.lightthenight.org/'); //back() not working, buggy?
+
+			});
+		});
+
+		//Donate  
+		casper.thenClick("a[href='/donatenew/']", function() {
+			
+			test.assertTitle("Search Participants/Events", "Donate: Page title is correct");
+			test.assertUrlMatch(env + 'pages', 'current page is served in ' + env);
+			test.assertExists('article.page', "Donate: Page content exists.");
+			casper.capture('Screenshots/LTN/LTN_Donate.png');
+
+		});
+
+		casper.run(function() {
+			test.done();
+		});
+
+	}
+}
+
+
+
+
+
+
+
+
+
