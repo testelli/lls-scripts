@@ -1,0 +1,327 @@
+module.exports = {
+	suiteName:'LLS.org Main Site',
+	run: function (test) {
+
+		console.log('Starting LLS.org test script...');
+		
+		// Home page
+		casper.start('http://www.lls.org/', function() {
+			test.assertUrlMatch('http://www.lls.org/', 'Home Page: URL is correct');
+			test.assertTitle("Leukemia & Lymphoma Society | Donate Today!", "LLS Home: Page title is correct");
+			test.assertExists('section.module.module-hero-slider', "LLS Home: Hero slider exists.");
+			casper.capture('Screenshots/LLS/LLS_Home.png');
+		});
+
+		// Donate page ==========================================================================================
+		casper.thenClick("a[href='https://donate.lls.org/lls/donate']", function() {
+			test.assertUrlMatch('https://donate.lls.org/lls/donate', 'Donate Page: URL is correct');
+			test.assertTitle("Donate to The Leukemia & Lymphoma Society", "Donate: Page title is correct");
+			test.assertExists('input[id="company"]', "Donate: Gift amount OK");
+			test.assertExists('input[id="payName"]', "Donate: Payment info OK");
+			casper.capture('Screenshots/LLS/LLS_Donate.png');
+
+			casper.thenOpen('http://www.lls.org/'); //back() not working content
+		});
+
+		//ABOUT ==========================================================================================
+		//About: Who we are ------------------------------------------------------------------------------
+		casper.thenClick('#dropdownMenu1', function() {
+			casper.thenClick("a[href='/who-we-are']", function() {
+				test.assertUrlMatch('http://www.lls.org/who-we-are', 'About | Who We Are: URL is correct');
+				test.assertTitle("Who We Are | Leukemia and Lymphoma Society", "About | Who We Are: Page title is correct");
+				test.assertExists('div.main-content-wrap', "About | Who We Are: Page content exists.");
+				casper.capture('Screenshots/LLS/About/LLS_About.png');
+			});
+		});
+		//About: Who we are - Beat AML
+		casper.thenClick('#dropdownMenu1', function() {
+			casper.thenClick("a[href='/beat-aml']", function() {
+				test.assertUrlMatch('http://www.lls.org/beat-aml', 'About | Beat AML: URL is correct');
+				test.assertTitle("Beat AML | Leukemia and Lymphoma Society", "About | Who We Are - Beat AML: Page title is correct");
+				test.assertExists('div.main-content-wrap', "About | Who We Are - Beat AML: Page content exists.");
+				casper.capture('Screenshots/LLS/About/LLS_BeatAML.png');
+			});
+		});
+		//About: Who we are - Mission
+		casper.thenClick('#dropdownMenu1', function() {
+			casper.thenClick("a[href='/who-we-are/mission']", function() {
+				test.assertTitle("Mission | Leukemia and Lymphoma Society", "About | Who We Are - Mission: Page title is correct");
+				test.assertExists('div.main-content-wrap', "About | Who We Are - Mission: Page content exists.");
+				casper.capture('Screenshots/LLS/About/LLS_Mission.png');
+			});
+		});
+		//About: Who we are - News
+		casper.thenClick('#dropdownMenu1', function() {
+			casper.thenClick("a[href='/news']", function() {
+				test.assertTitle("News Releases | Health News & Events | Leukemia & Lymphoma Society", "About | Who We Are - News: Page title is correct");
+				test.assertExists('div.main-content-wrap', "About | Who We Are - News: Page content exists.");
+				casper.capture('Screenshots/LLS/About/LLS_News.png');
+			});
+		});
+		//About: Who we are - Research Successes
+		casper.thenClick('#dropdownMenu1', function() {
+			casper.thenClick("a[href='/research-successes']", function() {
+				test.assertTitle("Research Successes | Leukemia and Lymphoma Society", "About | Who We Are - Research Successes: Page title is correct");
+				test.assertExists('div.main-content-wrap', "About | Who We Are - Research Successes: Page content exists.");
+				casper.capture('Screenshots/LLS/About/LLS_ResearchSuccesses.png');
+			});
+		});
+		//About: Who we are - History
+		casper.thenClick('#dropdownMenu1', function() {
+			casper.thenClick("a[href='/who-we-are/our-history']", function() {
+				test.assertTitle("Our History | Leukemia and Lymphoma Society", "About | Who We Are - History: Page title is correct");
+				test.assertExists('div.main-content-wrap', "About | Who We Are - History: Page content exists.");
+				casper.capture('Screenshots/LLS/About/LLS_History.png');
+			});
+		});
+		//About: Who we are - Why Give to LLS
+		casper.thenClick('#dropdownMenu1', function() {
+			casper.thenClick("a[href='/who-we-are/why-give-to-lls']", function() {
+				test.assertTitle("Why Give to LLS? | Leukemia and Lymphoma Society", "About | Who We Are - Why Give to LLS: Page title is correct");
+				test.assertExists('div.main-content-wrap', "About | Who We Are - Why Give to LLS: Page content exists.");
+				casper.capture('Screenshots/LLS/About/LLS__WhyGiveToLLS.png');
+			});
+		});
+		//About: Who we are - Financials
+		casper.thenClick('#dropdownMenu1', function() {
+			casper.thenClick("a[href='/who-we-are/financials']", function() {
+				test.assertTitle("Financials | Leukemia and Lymphoma Society", "About | Who We Are - Financials: Page title is correct");
+				test.assertExists('div.main-content-wrap', "About | Who We Are - Financials: Page content exists.");
+				casper.capture('Screenshots/LLS/About/LLS_Financials.png');
+			});
+		});
+		//About: Who we are - Leadership
+		casper.thenClick('#dropdownMenu1', function() {
+			casper.thenClick("a[href='/leadership']", function() {
+				test.assertTitle("LLS Leadership | Executive Leadership | Board of Directors", "About | Who We Are - Leadership: Page title is correct");
+				test.assertExists('div.main-content-wrap', "About | Who We Are - Leadership: Page content exists.");
+				casper.capture('Screenshots/LLS/About/LLS_Leadership.png');
+			});
+		});
+		//About: Who we are - Our Partners & Sponsors
+		casper.thenClick('#dropdownMenu1', function() {
+			casper.thenClick("a[href='/who-we-are/our-partners-sponsors']", function() {
+				test.assertTitle("Our Partners & Sponsors | Leukemia and Lymphoma Society", "About | Who We Are - Our Partners & Sponsors: Page title is correct");
+				test.assertExists('div.main-content-wrap', "About | Who We Are - Our Partners & Sponsors: Page content exists.");
+				casper.capture('Screenshots/LLS/About/LLS_OurPartners&Sponsors.png');
+			});
+		});
+		//About: Who we are - Partnership Opportunites
+		casper.thenClick('#dropdownMenu1', function() {
+			casper.thenClick("a[href='/corporate-partnership-opportunities']", function() {
+				test.assertTitle("Corporate Partnership Opportunities | Leukemia and Lymphoma Society", "About | Who We Are - Partnership Opportunites: Page title is correct");
+				test.assertExists('div.main-content-wrap', "About | Who We Are - Partnership Opportunites: Page content exists.");
+				casper.capture('Screenshots/LLS/About/LLS_PartnershipOpportunites.png');
+			});
+		});
+
+		//About: Chapters ------------------------------------------------------------------------------
+		casper.thenClick('#dropdownMenu1', function() {
+			casper.thenClick("a[href='/chapter-selection-page']", function() {
+				test.assertTitle("All Chapters | Leukemia and Lymphoma Society", "About | Chapters: Page title is correct");
+				test.assertExists('div.main-content-wrap', "About | Chapters: Page content exists.");
+				casper.capture('Screenshots/LLS/About/LLS_Chapters.png');
+			});
+		});
+	 	//About: Chapters - All Chapters ------------------------------------------------------------------------------
+		casper.thenClick('#dropdownMenu1', function() {
+			casper.thenClick("a[href='/chapter-selection-page']", function() {
+				test.assertTitle("All Chapters | Leukemia and Lymphoma Society", "About | Chapters: Page title is correct");
+				test.assertExists('div.main-content-wrap', "About | Chapters: Page content exists.");
+				casper.capture('Screenshots/LLS/About/LLS_Chapters.png');
+			});
+		});
+
+		//About: Contact ------------------------------------------------------------------------------
+		casper.thenClick('#dropdownMenu1', function() {
+			casper.thenClick("a[href='/contact/contact-us']", function() {
+				test.assertTitle("Contact Us | Leukemia & Lymphoma Society", "About | Contact: Page title is correct");
+				test.assertExists('div.main-content-wrap', "About | Contact: Page content exists.");
+				casper.capture('Screenshots/LLS/About/LLS_Contact.png');
+			});
+		});
+		//About: Contact - Contact LLS (same as above)
+		casper.thenClick('#dropdownMenu1', function() {
+			casper.thenClick("a[href='/contact/contact-us']", function() {
+				test.assertTitle("Contact Us | Leukemia & Lymphoma Society", "About | Contact: Page title is correct");
+				test.assertExists('div.main-content-wrap', "About | Contact: Page content exists.");
+				casper.capture('Screenshots/LLS/About/LLS_ContactLLS.png');
+			});
+		});
+		//About: Contact - Tech Support (same as above)
+		casper.thenClick('#dropdownMenu1', function() {
+			casper.thenClick("a[href='/contact/contact-us']", function() {
+				test.assertTitle("Contact Us | Leukemia & Lymphoma Society", "About | Contact: Page title is correct");
+				test.assertExists('div.main-content-wrap', "About | Contact: Page content exists.");
+				casper.capture('Screenshots/LLS/About/LLS_Contact_TechSupport.png');
+			});
+		});
+		//Work at LLS
+		casper.thenClick('#dropdownMenu1', function() {
+			casper.thenClick("a[href='/working-for-lls']", function() {
+				test.assertTitle("Working for The Leukemia & Lymphoma Society | Careers", "About | Work at LLS: Page title is correct");
+				test.assertExists('div.main-content-wrap', "About | Work at LLS: Page content exists.");
+				casper.capture('Screenshots/LLS/About/LLS_WorkAtLLS.png');
+			});
+		});
+		
+		//About: Contact - LLS en Espanol
+		// casper.thenClick('#dropdownMenu1', function() {
+		// 	casper.thenClick("a[href='http://espanol.lls.org/']", function() {
+
+		// 		casper.waitForPopup(/espanol.lls.org/, function() {
+		// 			this.test.assertEquals(this.popups.length, 1);
+		// 			});
+
+		// 		casper.withPopup(/eastern-pennsylvania/, function() {
+		// 			test.assertTitle("Translational Research Program | Blood Cancer Research Grant", "Research | Grant Finder: Page title is correct");
+		// 			test.assertExists('div.main-content-wrap', "Research | Grant Finder: Page content exists.");
+		// 			casper.capture('Screenshots/LLS/Research/LLS_GrantFinder.png');
+		// 		});
+		// 	});
+		// });
+
+		// //About: Contact - LLS Canada
+		// casper.thenClick('#dropdownMenu1', function() {
+		// 	casper.thenClick("a[href='http://espanol.lls.org/']", function() {
+
+		// 		casper.waitForPopup(/espanol.lls.org/, function() {
+		// 			this.test.assertEquals(this.popups.length, 1);
+		// 			});
+
+		// 		casper.withPopup(/eastern-pennsylvania/, function() {
+		// 			test.assertTitle("Translational Research Program | Blood Cancer Research Grant", "Research | Grant Finder: Page title is correct");
+		// 			test.assertExists('div.main-content-wrap', "Research | Grant Finder: Page content exists.");
+		// 			casper.capture('Screenshots/LLS/Research/LLS_GrantFinder.png');
+		// 		});
+		// 	});
+		// });
+
+		//RESEARCH ==========================================================================================
+		//Research: Academic Grants--------------------------------------------------------------------------
+		casper.thenClick('#dropdownMenu1', function() {
+			casper.thenClick("a[href='/academic-grants']", function() {
+				test.assertTitle("Academic Grants | Blood Cancer Research | Apply for a Grant", "Research | Academic Grants: Page title is correct");
+				test.assertExists('div.main-content-wrap', "Research | Academic Grants: Page content exists.");
+				casper.capture('Screenshots/LLS/Research/LLS_AcademicGrants.png');
+			});
+		});
+		//Research: Academic Grants - Career Development Programs
+		casper.thenClick('#dropdownMenu1', function() {
+			casper.thenClick("a[href='/research/career-development-program']", function() {
+				test.assertTitle("Career Development Program | Cancer Research | LLS", "Research | Career Development Programs: Page title is correct");
+				test.assertExists('div.main-content-wrap', "Research | Career Development Programs: Page content exists.");
+				casper.capture('Screenshots/LLS/Research/LLS_CareerDevPrograms.png');
+			});
+		});
+		//Research: Academic Grants - Translational Research Program
+		casper.thenClick('#dropdownMenu1', function() {
+			casper.thenClick("a[href='/research/translational-research-program']", function() {
+				test.assertTitle("Translational Research Program | Blood Cancer Research Grant", "Research | Translational Research Program: Page title is correct");
+				test.assertExists('div.main-content-wrap', "Research | Translational Research Program: Page content exists.");
+				casper.capture('Screenshots/LLS/Research/LLS_TranslationalResearchProgram.png');
+			});
+		});
+		//Research: Academic Grants - Specialized Center of Research Program
+		casper.thenClick('#dropdownMenu1', function() {
+			casper.thenClick("a[href='/research/specialized-center-of-research-program']", function() {
+				test.assertTitle("Specialized Center of Research Program | LLS", "Research | Specialized Center of Research Program: Page title is correct");
+				test.assertExists('div.main-content-wrap', "Research | Specialized Center of Research Program: Page content exists.");
+				casper.capture('Screenshots/LLS/Research/LLS_SpecCentofResearchProg.png');
+			});
+		});
+		//Research: Academic Grants - Grant Finder
+		// casper.thenClick('#dropdownMenu1', function() {
+		// 	casper.thenClick("a[href='http://forms.lls.org/FormRenderer/grants/search']", function() {
+
+		// 		casper.waitForPopup(/FormRenderer/, function() {
+		// 			this.test.assertEquals(this.popups.length, 1);
+		// 			});
+
+		// 		casper.withPopup(/eastern-pennsylvania/, function() {
+		// 			test.assertTitle("Translational Research Program | Blood Cancer Research Grant", "Research | Grant Finder: Page title is correct");
+		// 			test.assertExists('div.main-content-wrap', "Research | Grant Finder: Page content exists.");
+		// 			casper.capture('Screenshots/LLS/Research/LLS_GrantFinder.png');
+		// 		});
+		// 	});
+		// });
+
+
+		//Research: Therapy Acceleration Program-------------------------------------------------------------
+		casper.thenClick('#dropdownMenu1', function() {
+			casper.thenClick("a[href='/therapy-acceleration-program']", function() {
+				test.assertTitle("Therapy Acceleration Program | Blood Cancer Research Grant", "Research | Therapy Acceleration Program: Page title is correct");
+				test.assertExists('div.main-content-wrap', "Research | Therapy Acceleration Program: Page content exists.");
+				casper.capture('Screenshots/LLS/Research/LLS_Therapy.png');
+			});
+		});
+		//Research: Continuing Education----------------------------------------------------------------------
+		casper.thenClick('#dropdownMenu1', function() {
+			casper.thenClick("a[href='/continuing-education']", function() {
+				test.assertTitle("Continuing Education & Continuing Medical Education | Free Programs", "Research | Continuing Education: Page title is correct");
+				test.assertExists('div.main-content-wrap', "Research | Continuing Education: Page content exists.");
+				casper.capture('Screenshots/LLS/Research/LLS_ContEd.png');
+			});
+		});
+		//RESOURCES ==========================================================================================
+		//Resources: Disease Information		
+		casper.thenClick('#dropdownMenu1', function() {
+			casper.thenClick("a[href='/disease-information']", function() {
+				test.assertTitle("Types of Blood Cancer | Disease Information | Managing Cancer", "Resources | Disease Information: Page title is correct");
+				test.assertExists('div.main-content-wrap', "Resources | Disease Information: Page content exists.");
+				casper.capture('Screenshots/LLS/LLS_DiseaseInfo.png');
+			});
+		});
+		//Resources: Support Resources	
+		casper.thenClick('#dropdownMenu1', function() {
+			casper.thenClick("a[href='/support-resources']", function() {
+				test.assertTitle("Support Resources | Cancer Support Groups | Caregiver Support", "Resources | Support Resources: Page title is correct");
+				test.assertExists('div.main-content-wrap', "Resources | Support Resources: Page content exists.");
+				casper.capture('Screenshots/LLS/LLS_SuppResources.png');
+			});
+		});
+		//Resources: Education Resources	
+		casper.thenClick('#dropdownMenu1', function() {
+			casper.thenClick("a[href='/education-resources']", function() {
+				test.assertTitle("Education Resources | Leukemia and Lymphoma Society", "Resources | Education Resources: Page title is correct");
+				test.assertExists('div.main-content-wrap', "Resources | Education Resources: Page content exists.");
+				casper.capture('Screenshots/LLS/LLS_EdResources.png');
+			});
+		});
+		//PARTICIPATE ==========================================================================================
+		//Participate: Team LLS	
+		casper.thenClick('#dropdownMenu1', function() {
+			casper.thenClick("a[href='/team-lls']", function() {
+				test.assertTitle("Team LLS | Charitable Fundraising Events | Light the Night Walk", "Participate | Team LLS: Page title is correct");
+				test.assertExists('div.main-content-wrap', "Participate | Team LLS: Page content exists.");
+				casper.capture('Screenshots/LLS/LLS_TeamLLS.png');
+			});
+		});
+
+		//Need to handle pages opening in new tab
+
+		//Participate: Be An Advocate
+		casper.thenClick('#dropdownMenu1', function() {
+			casper.thenClick("a[href='/be-an-advocate']", function() {
+				test.assertTitle("Be An Advocate | Ways to Help | Leukemia & Lymphoma Society", "Participate | Be An Advocate: Page title is correct");
+				test.assertExists('div.main-content-wrap', "Participate | Be An Advocate: Page content exists.");
+				casper.capture('Screenshots/LLS/LLS_Advocate.png');
+			});
+		});	
+		//Participate: Other Ways To Help
+		casper.thenClick('#dropdownMenu1', function() {
+			casper.thenClick("a[href='/other-ways-to-help']", function() {
+				test.assertTitle("Ways to Help | Donate | Volunteer | Corporate Partnerships", "Participate | Other Ways To Help: Page title is correct");
+				test.assertExists('div.main-content-wrap', "Participate | Other Ways To Help: Page content exists.");
+				casper.capture('Screenshots/LLS/LLS_Participate.png');
+			});
+		});	
+
+		casper.run(function() {
+			test.done();
+		});
+	}
+
+}
+
+
