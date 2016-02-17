@@ -1,0 +1,84 @@
+module.exports = {
+	suiteName:'Read from file method',				
+	run: function (test) {
+
+		console.log('Starting read from file script for LCR...');
+
+		//setup for read file
+		var fs = require('fs');
+		var file_h = fs.open('/Users/matt/Desktop/Projects/LLS/LLS Automation/LLS_Tests/Paths/Regression_LCRPaths.txt', 'r');
+
+		//set timeout
+		casper.options.waitTimeout = 60000; 
+		
+		//start test
+		casper.start(env + 'leukemiacup.org', function startUp() {
+			//casper.waitForSelector("a[href='/firsttimehere/']", function() {
+				test.assertTitle("The Leukemia Cup Regatta", "LCRHome: Page title is correct");
+				test.assertUrlMatch(env, 'Current page is served in ' + env);
+				test.assertExists('div#content', "LCR Home Page: Page content exists.");
+				casper.capture('Screenshots/LCR/LCR_Home.png');	
+			//});
+		});	
+
+		//Readfile, pass lines to function, execute assertions based on lines read in.
+		casper.then(function() {
+			var data = [];
+			var line = file_h.readLine();
+
+			//Read in a line
+			while(line) {
+
+				//print the current line
+				console.log("The currently read line: " + line);
+				
+				data.push(line.split('~'));
+
+				line = file_h.readLine();
+			} 
+
+			file_h.close(); //close file
+
+			var func = function(index) {
+
+				casper.thenClick("a[href='"+data[index][0]+"']", function loopin() {
+
+
+					//wait
+					casper.wait(3000);
+
+
+					console.log('I am going to click this: ' + data[index][0]);
+					console.log('I am going to assert this: ' + data[index][1]);
+					
+					test.assertTitle(data[index][1], "Page title is correct");
+					test.assertUrlMatch(env, 'Current page is served in ' + env);
+					test.assertExists('div#mainContent_subpage', "Page content exists.");
+					casper.capture('Screenshots/TNT/'+data[index][1]+'.png');
+					
+					if (index < data.length) {
+						func(index + 1);
+					}
+				});
+			};
+
+			if (data.length > 0) {
+				func(0);
+			}
+
+	});
+
+		casper.run(function() {
+			
+			test.done();
+		});
+
+	}
+
+}
+
+
+
+
+
+
