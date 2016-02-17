@@ -1,0 +1,64 @@
+module.exports = {
+	suiteName:'Man & Woman Of The Year',
+	run: function (test) {
+
+		console.log('Starting Man and Woman of the Year test script...');
+
+		// Home page
+		casper.start(env + 'mwoy.org/', function() {
+			test.assertTitle("Man & Woman of the Year", "MWOY Home Page: title is correct");
+			test.assertUrlMatch(env, 'Current page is served in ' + env);
+			test.assertExists('div#mainContent', "MWOY Home Page: Page content exists");
+			casper.capture('Screenshots/MWOY/MWOY_Home.png');
+		});
+
+		// What is MWOY?
+		casper.thenClick("a[href='/what/']", function() {
+			test.assertTitle("What is Man & Woman of the Year?", "What is MWOY: Page title is correct");
+			test.assertUrlMatch(env, 'Current page is served in ' + env);
+			test.assertExists('div#container', "What is MWOY: Page content exists");
+			casper.capture('Screenshots/MWOY/MWOY_WhatIsMWOY.png');
+		});
+
+		//How to participate 
+		casper.thenClick("a[href='/how/']", function() {
+			test.assertTitle("How to Participate", "How to Participate: Page title is correct");
+			test.assertUrlMatch(env, 'Current page is served in ' + env);
+			test.assertExists('div#mainContent_subpage', "How to Paticipate: Page content exists.");
+			casper.capture('Screenshots/MWOY/MWOY_Participate.png');
+		});
+
+		//Meet the winners
+		casper.thenClick("a[href='/meet/']", function() {
+			test.assertTitle("Meet the Winners", "Meet the Winners: Page title is correct");
+			test.assertUrlMatch(env, 'Current page is served in ' + env);
+			test.assertExists('div#mainContent_subpage', "Meet the Winners: Page content exists.");
+			casper.capture('Screenshots/MWOY/MWOY_MeetWinners.png');
+		});
+
+
+		//Nominate a candidate
+		casper.thenClick("a[href='/nominate/']", function() {
+			test.assertTitle("Nominate a Candidate", "Nominate a Candidate: Page title is correct");
+			test.assertUrlMatch(env, 'Current page is served in ' + env);
+			test.assertExists('div#mainContent_subpage', "Nominate a Candidate: Page content exists.");
+			casper.capture('Screenshots/MWOY/MWOY_Nominate.png');
+		});
+
+
+		//Donate
+		casper.thenClick("a[href='/donate/']", function() {
+			test.assertTitle("Donate", "Donate: Page title is correct");
+			test.assertUrlMatch(env, 'Current page is served in ' + env);
+			test.assertExists('div#mainContent_subpage', "Donate: Page content exists.");
+			casper.capture('Screenshots/MWOY/MWOY_Donate.png');
+		});
+
+		casper.run(function() {
+			test.done();
+		});
+	}
+
+}
+
+
