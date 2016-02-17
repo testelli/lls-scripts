@@ -1,0 +1,87 @@
+module.exports = {
+	suiteName:'Leukemia Regatta Cup',
+	run: function (test) {
+
+		console.log('Starting Leukemia Regatta Cup test script...');
+
+		// Home page
+		casper.start(env + 'leukemiacup.org/', function() {
+			//check title
+			test.assertTitle("The Leukemia Cup Regatta", "Regatta Home Page: title is correct");
+			//cehck URL
+			test.assertUrlMatch(env, 'Current page is served in ' + env);
+			//check page content
+			test.assertExists('div#mainContent', "Regatta Home Page: Page content exists");
+			casper.capture('Screenshots/LCR/LCR_Home.png');
+			//search zip code 94920
+			this.sendKeys('input', "94920");
+			this.click('input.image');
+			//verify search works
+			casper.wait(2000, function () {
+				test.assertTitle('Greater Bay Area Chapter', "Regatta Home Page: Search by zip code working");
+				test.assertUrlMatch(env, 'Current page is served in ' + env);
+				casper.capture('Screenshots/LCR/LCR_ZipSearch.png');
+				casper.thenOpen(env + 'leukemiacup.org/'); //Back() not working
+			});
+		});
+
+		// What is The Leukemia Cup Regatta?
+		casper.thenClick("a[href='/what/']", function() {
+			test.assertTitle("What is the Leukemia Cup Regatta?", "What is Regatta: Page title is correct");
+			test.assertUrlMatch(env, 'Current page is served in ' + env);
+			test.assertExists('div#mainContent_subpage', "What is Regatta: Page content exists");
+			casper.capture('Screenshots/LCR/LCR_WhatisLCR.png');
+		});
+
+		//Ways to Participate
+		casper.thenClick("a[href='/ways/']", function() {
+			test.assertTitle("Ways to Participate", "Ways to Participate: Page title is correct");
+			test.assertUrlMatch(env, 'Current page is served in ' + env);
+			test.assertExists('div#mainContent_subpage', "Ways to Paticipate: Page content exists.");
+			casper.capture('Screenshots/LCR/LCR_Participate.png');
+		});
+
+		//Register 
+		casper.thenClick("a[href='/registernow/']", function() {
+			test.assertTitle("Calendar", "Register: Page title is correct"); //Register/Event Calendar are the same pages
+			test.assertUrlMatch(env, 'Current page is served in ' + env);
+			// test.assertExists('div#sign.page.shop', "Register: Page content exists")
+			casper.capture('Screenshots/LCR/LCR_Register.png');
+			casper.thenOpen(env + 'leukemiacup.org/'); //Back() not working
+		});
+
+		//Sign In
+		casper.thenClick("a[href='/registernow1/']", function() {
+			test.assertTitle("LLS eFundraising Sign-In", "Sign In: Page title is correct");
+			test.assertUrlMatch(env, 'Current page is served in ' + env);
+			test.assertExists('div#flexApp', "Sign-In: Page content exists")
+			casper.capture('Screenshots/LCR/LCR_SignIn.png');
+			casper.thenOpen(env + 'leukemiacup.org/'); //Back() not working
+			
+		});
+
+		//Event Calendar  
+		casper.thenClick("a[href='/eventcalendar/']", function() {
+			test.assertTitle("Calendar", "Event Calendar: Page title is correct");
+			test.assertUrlMatch(env, 'Current page is served in ' + env);
+			test.assertExists('div#mainContent_subpage', "Event Calendar: Page content exists.");
+			casper.capture('Screenshots/LCR/LCR_EventCalendar.png');
+		});
+
+		//Donate
+		casper.thenClick("a[href='/donate/']", function() {
+			test.assertTitle("Donate", "Donate: Page title is correct");
+			test.assertUrlMatch(env, 'Current page is served in ' + env);
+			test.assertExists('div#mainContent_subpage', "Donate: Page content exists.");
+			casper.capture('Screenshots/LCR/LCR_Donate.png');
+		});
+		
+		casper.run(function() {
+		test.done();
+		
+		});
+	}
+
+}
+
+
